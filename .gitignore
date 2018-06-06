@@ -23,7 +23,7 @@ public:
     }
     void del(node_t* node)
     {
-        if (root_ != nullptr)
+        if (node != nullptr)
         {
             if (node->left)
                 del(node->left);
