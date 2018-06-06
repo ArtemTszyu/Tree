@@ -21,7 +21,7 @@ public:
     {
         root_ = 0;
     }
-    void del(node_t* node)
+    static void del(node_t* node)
     {
         if (node != nullptr)
         {
