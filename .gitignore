@@ -1,32 +1,127 @@
-# Prerequisites
-*.d
+#include <iostream>
+#include <sstream>
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+using namespace std;
 
-# Precompiled Headers
-*.gch
-*.pch
+class tree_t
+{
+private:
+    struct node_t
+    {
+        node_t* left;
+        node_t* right;
+        int key;
+    };
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+private:
+    node_t* root_;
 
-# Fortran module files
-*.mod
-*.smod
+public:
+    tree_t()
+    {
+        root_ = 0;
+    }
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+    ~tree_t()
+    {
+        delete root_;
+    }
 
-# Executables
-*.exe
-*.out
-*.app
+    node_t root() const
+    {
+        return root_;
+    }
+
+    void insert(int key)
+    {
+        if (root_ == nullptr)
+        {
+            root_ = new node_t root_->key = key;
+            root_->left = nullptr;
+            root_->right = nullptr;
+        }
+        else
+        {
+            node_t* step = root_;
+            while (step != nullptr)
+            {
+                if (key > step->key)
+                {
+                    step = step->right;
+                }
+                else
+                {
+                    step = step->left;
+                }
+            }
+            step = new node_t;
+            step->key = key;
+            step->right = nullptr;
+            step->left = nullptr;
+        }
+    }
+
+
+    bool find(int key) const
+    {
+        node_t* temp = root_;
+        while (temp != nullptr)
+        {
+            if (key == temp->key)
+            {
+                return true;
+            }
+            else
+            {
+                if (key > temp->key)
+                {
+                    temp = temp->right;
+                }
+                else
+                {
+                    temp = temp->left;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    void print(std::ostream& stream, int i = 1) const
+    {
+        if (node->right)
+        {
+            i++;
+            print(stream, node->right, i);
+            i--;
+        }
+        for (size_t k = 0; k < i; k++)
+        {
+            stream << "--";
+        }
+        stream << node->value << std::endl;
+        if (node->left)
+        {
+            i++;
+            print(stream, node->left, i);
+            i--;
+        }
+    }
+    void Operator(std ::ostringstream &stream , tree_t & tree, int key)
+{
+	
+	char op;
+	bool fail=false;
+	while (read(op, key, fail)) {
+		if (op == '=') {
+			tree.print(stream, tree.root());
+			std::cout << stream.str();
+		}
+		else {
+			if (op == '+') tree.insert(value);
+			if (op == '?') tree.find(value);
+		}
+	}
+	if (fail) std::cerr << "fail";
+}
+};
